@@ -5,8 +5,8 @@ conda env
     conda install python==3.10.10 --yes
 
 pip install
-    pip install opencv-python
-    pip install pyzbar
+    pip install pillow opencv-python
+    pip install qrcode pyzbar
 
 on windows
     // #include <direct.h>
