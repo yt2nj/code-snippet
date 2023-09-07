@@ -47,7 +47,7 @@ def fetch():
 
             # close window if triggered
             flag_press_q = key in (ord("q"), ord("Q"))
-            flag_click_x = cv2.getWindowProperty("Webcam", cv2.WND_PROP_VISIBLE) < 0
+            flag_click_x = cv2.getWindowProperty("webcam", cv2.WND_PROP_VISIBLE) < 1
             if any((flag_press_q, flag_click_x)):
                 break
 
@@ -71,6 +71,8 @@ def fetch():
 
 def main():
     readable, errormsg = fetch()
+    if not any((readable, errormsg)):
+        return
 
     root = tk.Tk()
     root.title("webcam qrcode decode result")
