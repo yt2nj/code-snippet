@@ -1,0 +1,71 @@
+% !TEX program = XeLaTeX
+% !TEX encoding = UTF-8
+
+% https://github.com/Jonathan-LeRoux/IguanaTex
+
+\documentclass[12pt]{article}
+
+\usepackage[UTF8]{ctex}
+\usepackage{graphicx}
+\usepackage{soul, color, xcolor}
+\usepackage[paperwidth=11in]{geometry}
+\usepackage{amsfonts, amsmath, amsthm, bm, amssymb}
+\usepackage{float}
+\usepackage{diagbox}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{tcolorbox}
+
+\lstset{basicstyle=\small\ttfamily}
+
+\setlength{\parindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+\newtheorem*{prove}{Proof}
+
+\def \transposed {\mathsf{T}}
+\def \hermitian {\mathsf{H}}
+\def \realdomain {\mathbb{R}}
+\def \distribution {\mathcal{D}}
+
+% \let\oldnorm\norm
+% \let\norm\undefined
+% \let\oldemph\emph
+% \let\emph\undefined
+\newcommand\abs[1]{\left| #1 \right|}
+\newcommand\norm[1]{\left\| #1 \right\|}
+\newcommand\inner[2]{\left\langle #1, #2 \right\rangle}
+\newcommand\sbr[1]{\left( #1 \right)}
+\newcommand\mbr[1]{\left[ #1 \right]}
+\newcommand\lbr[1]{\left\{#1 \right\}}
+\newcommand\redmath[1]{\mathbin{\textcolor{red}{#1}}}
+\newcommand\bluemath[1]{\mathbin{\textcolor{blue}{#1}}}
+\newcommand\tr[1]{\operatorname{tr}\sbr{#1}}
+\newcommand\rank[1]{\operatorname{rank}\sbr{#1}}
+\newcommand\indicator[1]{\mathbb{I}\sbr{#1}}
+\newcommand\expectation[2]{\mathop{\mathbb{E}}\nolimits_{#1}\mbr{#2}}
+
+\newcommand \code[1] {\textcolor{blue}{\texttt{#1}}}
+\newcommand \strong[1] {\textcolor{red}{\textbf{#1}}}
+
+\newenvironment{textaligned}
+ {\let\displaystyle\textstyle\align}
+ {\endalign}
+\newenvironment{textaligned*}
+ {\let\displaystyle\textstyle\csname align*\endcsname}
+ {\endalign}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\everymath{\textstyle}
+
+\begin{textaligned*}
+\min & \norm{ g_T - \nabla L_T(\theta_T) } \\
+\text{s.t.} & \inner { g_T } { \nabla L_t(\theta_T) } \geqslant 0 \\
+\end{textaligned*}
+
+\end{document}
