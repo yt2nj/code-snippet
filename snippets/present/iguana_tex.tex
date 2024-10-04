@@ -1,0 +1,118 @@
+% !TEX program = XeLaTeX
+% !TEX encoding = UTF-8
+
+% https://github.com/Jonathan-LeRoux/IguanaTex
+
+\documentclass[12pt]{article}
+
+\usepackage[UTF8]{ctex}
+\usepackage{graphicx}
+\usepackage{soul, color, xcolor}
+\usepackage[paperwidth=11in]{geometry}
+\usepackage{amsfonts, amsmath, amsthm, bm, amssymb}
+\usepackage{float}
+\usepackage{diagbox}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{tcolorbox}
+
+\definecolor{gren}{RGB}{0,192,0}
+
+% \usepackage{fontspec}
+% \setmainfont{Times New Roman}
+% \setsansfont{Calibri}
+% \setmonofont{Consolas}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\lstset{basicstyle=\small\ttfamily}
+
+\setlength{\parindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+\newtheorem*{prove}{Proof}
+
+\def \transposed {\mathsf{T}}
+\def \hermitian {\mathsf{H}}
+\def \realdomain {\mathbb{R}}
+\def \distribution {\mathcal{D}}
+\def \Real {\mathbb{R}}
+
+\def \g {\bm{g}}
+\def \u {\bm{u}}
+\def \v {\bm{v}}
+\def \w {\bm{w}}
+\def \x {\bm{x}}
+\def \y {\bm{y}}
+\def \z {\bm{z}}
+
+\def \A {\bm{A}}
+\def \B {\bm{B}}
+\def \G {\bm{G}}
+\def \H {\bm{H}}
+\def \I {\bm{I}}
+\def \O {\bm{O}}
+\def \P {\bm{P}}
+\def \S {\bm{S}}
+\def \V {\bm{V}}
+
+\def \DD {\mathcal{D}}
+\def \OO {\mathcal{O}}
+\def \WW {\mathcal{W}}
+\def \XX {\mathcal{X}}
+
+% \let\oldnorm\norm
+% \let\norm\undefined
+% \let\oldemph\emph
+% \let\emph\undefined
+\newcommand \abs[1] {\left| #1 \right|}
+\newcommand \norm[1] {\left\| #1 \right\|}
+\newcommand \inner[2] {\left\langle #1, #2 \right\rangle}
+\newcommand \sbr[1] {\left( #1 \right)}
+\newcommand \mbr[1] {\left[ #1 \right]}
+\newcommand \lbr[1] {\left\{#1 \right\}}
+\newcommand \textabs[1] {| #1 |}
+\newcommand \textnorm[1] {\| #1 \|}
+\newcommand \textinner[2] {\langle #1, #2 \rangle}
+\newcommand \textsbr[1] {( #1 )}
+\newcommand \textmbr[1] {[ #1 ]}
+\newcommand \textlbr[1] {\{#1 \}}
+\newcommand \tr[1] {\operatorname{tr}\sbr{#1}}
+\newcommand \rank[1] {\operatorname{rank}\sbr{#1}}
+\newcommand \indicator[1] {\mathbb{I}\sbr{#1}}
+\newcommand \expectation[2] {\mathop{\mathbb{E}}\nolimits_{#1}\mbr{#2}}
+
+\newcommand \code[1] {\textcolor{green!50!black}{\texttt{#1}}}
+\newcommand \redmath[1] {\mathbin{\textcolor{red}{#1}}}
+\newcommand \bluemath[1] {\mathbin{\textcolor{blue}{#1}}}
+\newcommand \redtext[1] {\textcolor{red}{#1}}
+\newcommand \bluetext[1] {\textcolor{blue}{#1}}
+
+\newenvironment{textaligned}
+ {\let\displaystyle\textstyle\align}
+ {\endalign}
+\newenvironment{textaligned*}
+ {\let\displaystyle\textstyle\csname align*\endcsname}
+ {\endalign}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\everymath{\textstyle}
+
+\begin{table*}[!ht]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c}
+    \hline
+        \textbf{Curvature} & \textbf{Algorithm} & \textbf{Strongly Adaptive Regret} & \textbf{Time} & \textbf{Space} \\ \hline
+        general convex & \textcolor{blue}{AdaGrad} & $\mathcolor{gren}{ \mathcolor{blue}{D \tr{(\G_I)^{1/2}}} \log T }$ & $d^3 \mathcolor{gren}{\log T}$ & $d^2 \mathcolor{gren}{\log T}$ \\ \hline
+        general convex & \textcolor{red}{Sketched AdaGrad} & $\mathcolor{gren}{ \sbr{ \mathcolor{blue}{D \tr{(\hat{\G}_I)^{1/2}}} + \mathcolor{red}{dD \sqrt{\rho_{I,a:b}}} } \log T }$ & $md \mathcolor{gren}{\log T}$ & $md \mathcolor{gren}{\log T}$ \\ \hline
+        $\alpha$-exp-concave & \textcolor{blue}{ONS} & $\mathcolor{gren}{ \mathcolor{blue}{\frac{1}{\alpha} \log\sbr{\det\sbr{\I + \alpha \G_I}}} \log T }$ & $d^3 \mathcolor{gren}{\log T}$ & $d^2 \mathcolor{gren}{\log T}$ \\ \hline
+        $\alpha$-exp-concave & \textcolor{red}{Sketched ONS} & $\mathcolor{gren}{ \sbr{ \mathcolor{blue}{\frac{1}{\alpha} \log\sbr{\det\sbr{\I + \alpha \hat{\G}_I}}} + \mathcolor{red}{\sqrt{\frac{m}{\alpha} \rho_{I,a:b}}} } \log T }$ & $md \mathcolor{gren}{\log T}$ & $md \mathcolor{gren}{\log T}$ \\ \hline
+    \end{tabular}
+\end{table*}
+
+\end{document}
