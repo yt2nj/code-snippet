@@ -56,9 +56,7 @@ def fetch():
             current = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-4]
             if decoded:
                 for qrcode in decoded:
-                    escaped = repr(qrcode.data.decode("utf-8"))[1:-1]
-                    splited = "\n".join(escaped.split("\\n"))
-                    readable.append((current, splited))
+                    readable.append((current, qrcode.data))
                 break
 
         except:
@@ -83,18 +81,24 @@ def main():
     text_widget = scrolledtext.ScrolledText(frame, state="normal", width=64, height=16)
     text_widget.pack()
 
-    for stamp, document in readable:
-        text_widget.insert(tk.END, "@ {}\n".format(stamp), "black")
-        text_widget.insert(tk.END, "{}\n".format(document), "blue")
+    for stamp, binary in readable:
+        text_widget.insert(tk.END, "@ {}\n".format(stamp), "inverse")
+        escaped = repr(binary.decode("utf-8"))[1:-1]
+        escaped = "\n".join(escaped.split("\\n"))
+        text_widget.insert(tk.END, "{}\n".format(escaped), "blue")
+        escaped = repr(binary)[2:-1]
+        text_widget.insert(tk.END, "{}\n".format(escaped), "green")
 
-    for stamp, document in errormsg:
-        text_widget.insert(tk.END, "@ {}\n".format(stamp), "black")
-        text_widget.insert(tk.END, "{}\n".format(document), "red")
+    for stamp, msg in errormsg:
+        text_widget.insert(tk.END, "@ {}\n".format(stamp), "inverse")
+        text_widget.insert(tk.END, "{}\n".format(msg), "red")
 
-    text_widget.config(state="disabled", font=tk_font.Font(family="monospace", size=16))
-    text_widget.tag_config("black", foreground="black")
-    text_widget.tag_config("blue", foreground="blue")
-    text_widget.tag_config("red", foreground="red")
+    text_widget.config(state="disabled", font=tk_font.Font(family="Fixedsys", size=16))
+
+    text_widget.tag_config("inverse", background="black", foreground="white")
+    text_widget.tag_config("blue", background="white", foreground="blue")
+    text_widget.tag_config("green", background="white", foreground="green")
+    text_widget.tag_config("red", background="white", foreground="red")
 
     root.mainloop()
 
