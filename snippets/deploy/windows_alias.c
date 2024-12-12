@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+// For Python GUI scripts, use "start /b pythonw.exe script.py".
+
 const char * prefix = "git log -n 8 --graph --abbrev-commit --date=relative "
                       "--pretty=format:\"%C(bold red)%h%Creset - %s %C(bold green)(%cr)%Creset %C(bold blue)<\"%an\", %ae>%Creset%C(bold magenta)%d%Creset\" ";
 
