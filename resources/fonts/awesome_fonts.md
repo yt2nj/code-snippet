@@ -4,8 +4,8 @@ https://github.com/source-foundry/Hack
 Monaspace
 https://github.com/githubnext/monaspace
 
-Noto
-https://fonts.google.com/noto
+Aptos
+https://learn.microsoft.com/en-us/typography/font-list/aptos
 
 CMU
 https://www.fontsquirrel.com/fonts/computer-modern
