@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>加密解密工具</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 90vw;
+      height: 80vh;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: row;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      margin-right: 20px;
+      overflow-y: scroll;
+      font-family: monospace;
+    }
+
+    .button-group button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      transition: background-color 0.3s ease;
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <textarea id="inputText" placeholder="输入文字" ondragover="handleDragOver(event)"
+      ondrop="handleFileDrop(event)"></textarea>
+    <textarea id="outputText" placeholder="加密/解密结果" readonly></textarea>
+  </div>
+  <div class="button-group">
+    <button onclick="encrypt()">加密</button>
+    <button onclick="decrypt()">解密</button>
+    <button onclick="downloadText()">下载结果</button>
+  </div>
+
+  <script>
+    let incValue = 59;
+
+    function encrypt() {
+      const input = encodeURIComponent(document.getElementById('inputText').value);
+      let encrypted = '';
+      for (let i = 0; i < input.length; i++) {
+        let charCode = input.charCodeAt(i);
+        charCode = (charCode + incValue) % 256;
+        encrypted += String.fromCharCode(charCode);
+      }
+      const base64Encoded = btoa(encrypted);
+      document.getElementById('outputText').value = base64Encoded;
+    }
+
+    function decrypt() {
+      const output = document.getElementById('inputText').value;
+      const decoded = atob(output);
+      let decrypted = '';
+      for (let i = 0; i < decoded.length; i++) {
+        let charCode = decoded.charCodeAt(i);
+        charCode = (charCode + (256 - incValue)) % 256;
+        decrypted += String.fromCharCode(charCode);
+      }
+      document.getElementById('outputText').value = decodeURIComponent(decrypted);
+    }
+    function handleDragOver(event) {
+      event.preventDefault();
+    }
+
+    function handleFileDrop(event) {
+      event.preventDefault();
+      const file = event.dataTransfer.files[0];
+      if (file.type === 'text/plain') {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const text = event.target.result;
+          document.getElementById('inputText').value = text;
+        };
+        reader.readAsText(file);
+      } else {
+        alert('[ERROR] 请上传TXT格式的文件!');
+      }
+    }
+
+    function downloadText() {
+      const now = new Date();
+      const formattedDate = now.toISOString().slice(0, 23).replace(/[T.]/g, '_').replace(/[:]/g, '-');
+      const textToSave = document.getElementById('outputText').value;
+      const blob = new Blob([textToSave], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `${formattedDate}.txt`;
+      link.click();
+    }
+  </script>
+
+</body>
+
+</html>
