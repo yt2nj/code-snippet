@@ -12,4 +12,6 @@ PS1='$\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \
 PS1='\D{%H:%M:%S} \u@\h:\W\$ '
 PS1='\[\e[35;1m\]\D{%H:%M:%S}\[\e[0m\] \[\e[32;1m\]\u\[\e[0m\]@\[\e[34;1m\]\h\[\e[0m\]:\[\e[33;1m\]\W\[\e[0m\] \[\e[31;1m\]\$\[\e[0m\] '
 
+# for windows, add an environment variable SET PROMPT="$T $P$G"
+
 alias gl="git log --graph --abbrev-commit --date=relative --pretty=format:'%C(bold red)%h%Creset - %s %C(bold green)(%cr)%Creset %C(bold blue)<\"%an\", %ae>%Creset%C(bold magenta)%d%Creset'"
